@@ -1,15 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
-// handling CORS
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", 
-               "http://localhost:4200");
-    res.header("Access-Control-Allow-Headers", 
-               "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+const corsOptions = {
+    origin: 'http://localhost:4200'
+  };
+
+app.use(cors(corsOptions));
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
+});
+
+app.get('/api/message', (req, res) => {
+  console.log('GET request received');
+    res.json({ message: 
+            'Hello Folks from the Express server!' });
 });
